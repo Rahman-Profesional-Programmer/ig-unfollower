@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auto Unfollow Instagram</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, sans-serif;
+      color: #172033;
+      background: #fff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 370px;
+      max-height: 620px;
+      overflow-y: auto;
+      padding: 16px;
+      margin: 0;
+      font-size: 13px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .language-switch {
+      display: flex;
+      gap: 4px;
+    }
+
+    .language-switch button {
+      width: auto;
+      padding: 5px 8px;
+      border: 1px solid #d5d9e0;
+      border-radius: 6px;
+      background: #fff;
+      color: #445064;
+      font-size: 11px;
+    }
+
+    .language-switch button.active {
+      border-color: #7044c5;
+      background: #7044c5;
+      color: #fff;
+    }
+
+    .notice {
+      padding: 10px 11px;
+      border-radius: 6px;
+      background: #fff2d6;
+      color: #754600;
+      line-height: 1.45;
+      font-size: 12px;
+    }
+
+    .notice p {
+      margin: 0;
+    }
+
+    .notice .caveat {
+      margin-top: 5px;
+      color: #805a20;
+      font-size: 11px;
+    }
+
+    .section {
+      padding: 14px 0;
+      border-bottom: 1px solid #e3e5e9;
+    }
+
+    .section-title {
+      display: block;
+      margin-bottom: 8px;
+      color: #273248;
+      font-weight: 700;
+    }
+
+    .field-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .field-row label {
+      flex: 1;
+      line-height: 1.4;
+    }
+
+    input[type="number"] {
+      width: 76px;
+      min-width: 0;
+      padding: 8px;
+      border: 1px solid #d9dce2;
+      border-radius: 7px;
+      background: #f7f7f9;
+      color: #172033;
+      font: inherit;
+    }
+
+    .range-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 12px;
+    }
+
+    .range-title {
+      grid-column: 1 / -1;
+    }
+
+    .range-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      color: #677184;
+      font-size: 11px;
+    }
+
+    .range-field input {
+      width: 100%;
+    }
+
+    .range-row label {
+      line-height: 1.4;
+    }
+
+    .unit {
+      color: #677184;
+      font-size: 12px;
+    }
+
+    .running-info {
+      display: grid;
+      gap: 8px;
+      padding: 13px 0;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: #515c70;
+    }
+
+    .info-row strong {
+      color: #172033;
+      font-variant-numeric: tabular-nums;
+    }
+
+    #status {
+      min-height: 18px;
+      margin: 8px 0 12px;
+      color: #515c70;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .actions button {
+      width: 100%;
+      padding: 10px;
+      border: 0;
+      border-radius: 7px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #startBtn {
+      background: #7044c5;
+    }
+
+    #startBtn:hover:not(:disabled) {
+      background: #5e35b1;
+    }
+
+    #stopBtn {
+      background: #d64242;
+    }
+
+    #stopBtn:hover:not(:disabled) {
+      background: #bf3030;
+    }
+
+    button:disabled,
+    input:disabled {
+      cursor: not-allowed;
+      opacity: .55;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 data-i18n="title">Auto Unfollow IG</h1>
+    <div class="language-switch" role="group" aria-label="Language">
+      <button id="langId" type="button" class="active" aria-pressed="true">ID</button>
+      <button id="langEn" type="button" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <aside class="notice">
+    <p data-i18n="dailyNotice">Gunakan target 200 unfollow per hari untuk menjaga keamanan akun.</p>
+    <p class="caveat" data-i18n="safetyCaveat">Batas Instagram dapat berubah; jeda tidak menjamin akun aman.</p>
+  </aside>
+
+  <section class="section">
+    <label class="section-title" for="targetUnfollow" data-i18n="targetLabel">Target total unfollow</label>
+    <div class="field-row">
+      <input id="targetUnfollow" type="number" value="200" min="1" step="1" inputmode="numeric">
+      <span class="unit" data-i18n="usersUnit">akun</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="section-title" data-i18n="intervalTitle">Jeda antar permintaan</span>
+    <div class="range-row">
+      <span class="range-title" data-i18n="intervalLabel">Rentang jeda (detik)</span>
+      <label class="range-field" for="minDelay">
+        <span data-i18n="minLabel">Min</span>
+        <input id="minDelay" type="number" value="10" min="1" max="2147483" step="1" inputmode="numeric">
+      </label>
+      <label class="range-field" for="maxDelay">
+        <span data-i18n="maxLabel">Maks</span>
+        <input id="maxDelay" type="number" value="15" min="1" max="2147483" step="1" inputmode="numeric">
+      </label>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="field-row">
+      <span data-i18n="forEveryLabel">Setiap</span>
+      <input id="cooldownEvery" type="number" value="9" min="1" step="1" inputmode="numeric" data-i18n-aria="cooldownEveryAria">
+      <span data-i18n="usersUnfollowedLabel">akun berhasil di-unfollow</span>
+    </div>
+    <div class="field-row" style="margin-top:8px">
+      <span class="unit" data-i18n="cooldownDurationLabel">Istirahat selama</span>
+      <input id="cooldownMinutes" type="number" value="10" min="1" max="35791" step="1" inputmode="numeric" data-i18n-aria="cooldownDurationAria">
+      <span class="unit" data-i18n="minutesUnit">menit</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <label class="section-title" for="failurePause" data-i18n="failurePrefix">Jika permintaan gagal, jeda selama</label>
+    <div class="field-row">
+      <input id="failurePause" type="number" value="30" min="1" max="35791" step="1" inputmode="numeric">
+      <span class="unit" data-i18n="minutesUnit">menit</span>
+      <span data-i18n="failureSuffix">sebelum mencoba lagi</span>
+    </div>
+  </section>
+
+  <section class="running-info" aria-live="polite">
+    <div class="info-row">
+      <span data-i18n="nextActionLabel">Aksi berikutnya dalam</span>
+      <strong id="nextAction">--:--:--</strong>
+    </div>
+    <div class="info-row">
+      <span data-i18n="runtimeLabel">Aplikasi berjalan selama</span>
+      <strong id="runtime">00:00:00</strong>
+    </div>
+  </section>
+
+  <div id="status" role="status" aria-live="polite" data-i18n="statusReady">Status: Siap</div>
+
+  <div class="actions">
+    <button id="startBtn" type="button" data-i18n="startButton">Mulai</button>
+    <button id="stopBtn" type="button" data-i18n="stopButton" disabled>Stop</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
