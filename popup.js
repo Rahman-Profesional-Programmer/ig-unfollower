@@ -1,6 +1,6 @@
 const translations = {
   id: {
-    title: 'Auto Unfollow IG',
+    title: 'Auto Unfollow IG by Indah Amuntai',
     dailyNotice: 'Gunakan target 200 unfollow per hari untuk menjaga keamanan akun.',
     safetyCaveat: 'Batas Instagram dapat berubah; jeda tidak menjamin akun aman.',
     targetLabel: 'Target total unfollow',
@@ -39,7 +39,7 @@ const translations = {
     errorStatus: 'Tidak dapat membaca status proses'
   },
   en: {
-    title: 'Auto Unfollow IG',
+    title: 'Auto Unfollow IG by Indah Amuntai',
     dailyNotice: 'Use a target of 200 unfollows per day to help keep your account safe.',
     safetyCaveat: 'Instagram limits may change; delays cannot guarantee account safety.',
     targetLabel: 'Total unfollow target',
